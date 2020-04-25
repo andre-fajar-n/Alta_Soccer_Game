@@ -1,0 +1,11 @@
+#lapangan {
+    background-image: url('lapangan.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 600px;
+    background-position: center;
+}
+
+#dodger {
+    border-radius: 50%;
+}
