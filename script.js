@@ -56,10 +56,10 @@
 
 // let loop = setInterval(render, 500)
 
-let dodger = document.getElementById('dodger')
-let player1 = dodger.style
+let player = document.getElementById('player1')
+let player1 = player.style
 player1.backgroundColor = '#FF69B4'
-player1.left = '25px'
+player1.left = '240px'
 player1.bottom = '-250px'
 player1.position = 'relative'
 player1.width = player1.height = '75px'
@@ -76,7 +76,7 @@ document.addEventListener('keydown', function(e) {
         var leftNumbers = player1.left.replace('px', '')
         var left = parseInt(leftNumbers, 10)
         left -= speed
-        if (left < left_field_player1) player1.left = '25px'
+        if (left < left_field_player1) player1.left = left_field_player1
         else player1.left = `${left}px`
     }
     if (e.which === 39) {
