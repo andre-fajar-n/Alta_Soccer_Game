@@ -102,3 +102,15 @@ document.addEventListener('keydown', function(e) {
     }
   })
   
+let player_2nd = document.getElementById('player2')
+let player2 = player_2nd.style
+player2.backgroundColor = 'blue'
+player2.left = '600px'
+player2.bottom = '-250px'
+player2.position = 'relative'
+player2.width = player2.height = '75px'
+
+let left_field_player2 = 240
+let top_field_player2 = -25
+let bottom_field_player2 = -500
+let right_field_player2 = 595
