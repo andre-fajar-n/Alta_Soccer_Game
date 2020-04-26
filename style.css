@@ -1,0 +1,22 @@
+.lapangan{
+    background-image: url(lapangan.png);
+    background-size: contain;
+    height: 600px;
+    width: 900px;
+    display: flex;
+    justify-content: center;
+    /* position: relative; */
+}
+#player1, #player2, #ball {
+    border-radius: 50%;
+}
+body{
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+}
+/* .empty{
+    width: 25px;
+    height: 25px;
+    background-color: pink;
+} */
