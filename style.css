@@ -1,11 +1,22 @@
-#lapangan {
-    background-image: url('lapangan.png');
-    background-repeat: no-repeat;
-    background-size: contain;
+.field {
     height: 600px;
-    background-position: center;
+    width: 1200px;
+    display: flex;
+    justify-content: center;
+    position: relative;
 }
 
 #player1, #player2 {
+
     border-radius: 50%;
+    position: absolute;
+    z-index: 40;
+}
+body{
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+}
+.lapangan{
+    position: relative;
 }

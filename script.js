@@ -56,11 +56,11 @@
 
 // let loop = setInterval(render, 500)
 
-let player = document.getElementById('player1')
-let player1 = player.style
+let player_first = document.getElementsByClassName('player1')
+let player1 = player_first.style
 player1.backgroundColor = '#FF69B4'
 player1.left = '240px'
-player1.bottom = '-250px'
+player1.bottom = '250px'
 player1.position = 'relative'
 player1.width = player1.height = '75px'
 
@@ -76,29 +76,29 @@ document.addEventListener('keydown', function(e) {
         var leftNumbers = player1.left.replace('px', '')
         var left = parseInt(leftNumbers, 10)
         left -= speed
-        if (left < left_field_player1) player1.left = left_field_player1
-        else player1.left = `${left}px`
+        // if (left < left_field_player1) player1.left = left_field_player1
+        // else player1.left = `${left}px`
     }
     if (e.which === 39) {
         var rightNumbers = player1.left.replace('px', '')
         var right = parseInt(rightNumbers, 10)
         right += speed
-        if (right > right_field_player1) player1.left = '25px'
-        else player1.left = `${right}px`
-        player1.left = `${right}px`
+        // if (right > right_field_player1) player1.left = right_field_player1
+        // else player1.left = `${right}px`
     }
     if (e.which === 38) {
         var topNumbers = player1.bottom.replace('px', '')
         var top = parseInt(topNumbers, 10)
         top += speed
-        if (right > right_field_player1) player1.left = '25px'
-        else player1.left = `${right}px`
-        player1.bottom = `${top + 5}px`
+        // if (top > top_field_player1) player1.bottom = top_field_player1
+        // else player1.bottom = `${top}px`
     }
     if (e.which === 40) {
         var bottomNumbers = player1.bottom.replace('px', '')
         var bottom = parseInt(bottomNumbers, 10)
-        player1.bottom = `${bottom - 5}px`
+        bottom -= speed
+        // if (bottom < bottom_field_player1) player1.bottom = bottom_field_player1
+        // else player1.bottom = `${bottom}px`
     }
   })
   
