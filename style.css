@@ -5,7 +5,9 @@
     justify-content: center;
     position: relative;
 }
-.player1 {
+
+#player1, #player2 {
+
     border-radius: 50%;
     position: absolute;
     z-index: 40;
