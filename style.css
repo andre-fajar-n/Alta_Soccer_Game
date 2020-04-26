@@ -1,22 +1,22 @@
 .field {
     height: 600px;
-    width: 1200px;
+    width: 1000px;
     display: flex;
     justify-content: center;
-    position: relative;
+    /* position: relative; */
 }
 
-#player1, #player2 {
+#player1, #player2, #ball {
 
     border-radius: 50%;
-    position: absolute;
-    z-index: 40;
 }
 body{
     display: flex;
     justify-content: center;
     margin-top: 0;
 }
-.lapangan{
-    position: relative;
+.empty{
+    width: 25px;
+    height: 25px;
+    background-color: white;
 }
