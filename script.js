@@ -1,116 +1,143 @@
-// const canvas = document.createElement('canvas')
-
-// const context = canvas.getContext('2d')
-// canvas.width = 1300
-// canvas.height = 550
-// document.body.appendChild(canvas)
-
-// function loop(){
-//     context.fillStyle = '#12FF12'
-//     context.fillRect(50, 50, canvas.width, canvas.height)
-//     requestAnimationFrame(loop)
-// }
-
-// function ball(){
-//     context.fillStyle = '#FFFFFF'
-//     context.beginPath()
-//     context.arc(canvas.width/2, canvas.height/2, 100, Math.PI*2, false)
-//     context.closePath()
-//     context.fill()
-// }
-
-// function drawRect(x, y, w, h, color){
-//     context.fillStyle = color;
-//     context.fillRect(x, y, w, h);
-// }
-
-// // User Paddle
-// const user = {
-//     x : 0, // left side of canvas
-//     y : (canvas.height - 100)/2, // -100 the height of paddle
-//     width : 10,
-//     height : 100,
-//     score : 0,
-//     color : "WHITE"
-// }
-
-// // COM Paddle
-// const com = {
-//     x : canvas.width - 10, // - width of paddle
-//     y : (canvas.height - 100)/2, // -100 the height of paddle
-//     width : 10,
-//     height : 100,
-//     score : 0,
-//     color : "WHITE"
-// }
-
-// function render(){
-//     loop()
-//     ball()
-//     drawRect(user.x, user.y, user.width, user.height, user.color);
-        
-//     // draw the COM's paddle
-//     drawRect(com.x, com.y, com.width, com.height, com.color);
-
-// }
-
-// let loop = setInterval(render, 500)
-
-let player_first = document.getElementsByClassName('player1')
+// player1
+let player_first = document.getElementById('player1')
 let player1 = player_first.style
 player1.backgroundColor = '#FF69B4'
-player1.left = '240px'
-player1.bottom = '250px'
+player1.left = '105px'
+player1.bottom = '-260px'
 player1.position = 'relative'
 player1.width = player1.height = '75px'
+let up1 = down1 = left1 = right1 = 0
 
-let left_field_player1 = 240
+let left_field_player1 = 105
 let top_field_player1 = -25
+let right_field_player1 = 500
 let bottom_field_player1 = -500
-let right_field_player1 = 595
 
-let speed = 5
-
-document.addEventListener('keydown', function(e) {
-    if (e.which === 37) {
-        var leftNumbers = player1.left.replace('px', '')
-        var left = parseInt(leftNumbers, 10)
-        left -= speed
-        // if (left < left_field_player1) player1.left = left_field_player1
-        // else player1.left = `${left}px`
-    }
-    if (e.which === 39) {
-        var rightNumbers = player1.left.replace('px', '')
-        var right = parseInt(rightNumbers, 10)
-        right += speed
-        // if (right > right_field_player1) player1.left = right_field_player1
-        // else player1.left = `${right}px`
-    }
-    if (e.which === 38) {
-        var topNumbers = player1.bottom.replace('px', '')
-        var top = parseInt(topNumbers, 10)
-        top += speed
-        // if (top > top_field_player1) player1.bottom = top_field_player1
-        // else player1.bottom = `${top}px`
-    }
-    if (e.which === 40) {
-        var bottomNumbers = player1.bottom.replace('px', '')
-        var bottom = parseInt(bottomNumbers, 10)
-        bottom -= speed
-        // if (bottom < bottom_field_player1) player1.bottom = bottom_field_player1
-        // else player1.bottom = `${bottom}px`
-    }
-  })
-  
+// player 2
 let player_2nd = document.getElementById('player2')
 let player2 = player_2nd.style
 player2.backgroundColor = 'blue'
-player2.left = '600px'
-player2.bottom = '-250px'
+player2.left = '-105px'
+player2.bottom = '-265px'
 player2.position = 'relative'
 player2.width = player2.height = '75px'
+let up2 = down2 = left2 = right2 = 0
 
-let left_field_player2 = 240
-let top_field_player2 = -25
-let bottom_field_player2 = -500
-let right_field_player2 = 595
+let left_field_player2 = -495
+let top_field_player2 = -30
+let right_field_player2 = -105
+let bottom_field_player2 = -495
+
+// ball
+let ball = document.getElementById('ball')
+let balls = ball.style
+balls.backgroundColor = 'red'
+balls.left = '-630px'
+balls.bottom = '-290px'
+balls.position = 'relative'
+balls.width = balls.height = '25px'
+
+let speed = 10
+
+// Keyboard Function on Keydown
+document.onkeydown = function(event) {
+    let key = String.fromCharCode(event.keyCode);
+    // Player 1
+    if (key === 'W') up1 = 1;
+    if (key === 'S') down1 = 1;
+    if (key === 'A') left1 = 1;
+    if (key === 'D') right1 = 1;
+    
+    // Player 2
+    if (key === 'I') up2 = 1;
+    if (key === 'K') down2 = 1;
+    if (key === 'J') left2 = 1;
+    if (key === 'L') right2 = 1;
+};
+
+// Keyboard Function on Keyup
+document.onkeyup = function(event) {
+    let key = String.fromCharCode(event.keyCode);
+    // Player 1
+    if (key === 'W') up1 = 0;
+    if (key === 'S') down1 = 0;
+    if (key === 'A') left1 = 0;
+    if (key === 'D') right1 = 0;
+    
+    // Player 2
+    if (key === 'I') up2 = 0;
+    if (key === 'K') down2 = 0;
+    if (key === 'J') left2 = 0;
+    if (key === 'L') right2 = 0;
+};
+
+function movePlayer1(){
+    if (left1 === 1) {
+        var leftNumbers = player1.left.replace('px', '')
+        var left = parseInt(leftNumbers, 10)
+        left -= speed
+        if (left < left_field_player1) player1.left = left_field_player1
+        else player1.left = `${left}px`
+    }
+    if (right1 === 1) {
+        var rightNumbers = player1.left.replace('px', '')
+        var right = parseInt(rightNumbers, 10)
+        right += speed
+        if (right > right_field_player1) player1.left = right_field_player1
+        else player1.left = `${right}px`
+    }
+    if (up1 === 1) {
+        var topNumbers = player1.bottom.replace('px', '')
+        var top = parseInt(topNumbers, 10)
+        top += speed
+        if (top > top_field_player1) player1.bottom = top_field_player1
+        else player1.bottom = `${top}px`
+    }
+    if (down1 === 1) {
+        var bottomNumbers = player1.bottom.replace('px', '')
+        var bottom = parseInt(bottomNumbers, 10)
+        bottom -= speed
+        if (bottom < bottom_field_player1) player1.bottom = bottom_field_player1
+        else player1.bottom = `${bottom}px`
+    }
+}
+
+function movePlayer2(){
+    if (left2 === 1) {
+        var leftNumbers = player2.left.replace('px', '')
+        var left = parseInt(leftNumbers, 10)
+        left -= speed
+        if (left < left_field_player2) player2.left = left_field_player2
+        else player2.left = `${left}px`
+    }
+    if (right2 === 1) {
+        var rightNumbers = player2.left.replace('px', '')
+        var right = parseInt(rightNumbers, 10)
+        right += speed
+        if (right > right_field_player2) player2.left = right_field_player2
+        else player2.left = `${right}px`
+    }
+    if (up2 === 1) {
+        var topNumbers = player2.bottom.replace('px', '')
+        var top = parseInt(topNumbers, 10)
+        top += speed
+        if (top > top_field_player2) player2.bottom = top_field_player2
+        else player2.bottom = `${top}px`
+    }
+    if (down2 === 1) {
+        var bottomNumbers = player2.bottom.replace('px', '')
+        var bottom = parseInt(bottomNumbers, 10)
+        bottom -= speed
+        if (bottom < bottom_field_player2) player2.bottom = bottom_field_player2
+        else player2.bottom = `${bottom}px`
+    }
+}
+function startGame(){
+    movePlayer1()
+    movePlayer2()
+}
+window.onload = function() {
+    // player_first = document.getElementById('player1')
+    // player_2nd = document.getElementById('player2')
+    setInterval("startGame()",100);
+};
