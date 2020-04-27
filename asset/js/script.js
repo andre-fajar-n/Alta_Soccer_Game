@@ -1,10 +1,9 @@
 // kickoff ball
-let initial_x = '100px'
+let initial_x = '0px'
 let initial_y = '-285px'
 
 // ball
 let ball = document.getElementById('ball').style
-ball.backgroundColor = 'red'
 ball.left = initial_x
 ball.bottom = initial_y
 ball.position = 'relative'
@@ -17,7 +16,6 @@ let pos_ball_y = pos_ball[1]
 
 // player1
 let player1 = document.getElementById('player1').style
-player1.backgroundColor = '#FF69B4'
 player1.left = '-335px'
 player1.bottom = '-260px'
 player1.position = 'relative'
@@ -25,23 +23,22 @@ player1.width = player1.height = '75px'
 let up1 = down1 = left1 = right1 = 0
 
 let left_field_player1 = -335
-let top_field_player1 = -30
-let right_field_player1 = 15
-let bottom_field_player1 = -490
+let top_field_player1 = -20
+let right_field_player1 = 435
+let bottom_field_player1 = -500
 
 // player 2
 let player2 = document.getElementById('player2').style
-player2.backgroundColor = 'blue'
 player2.left = '335px'
 player2.bottom = '-260px'
 player2.position = 'relative'
 player2.width = player2.height = '75px'
 let up2 = down2 = left2 = right2 = 0
 
-let left_field_player2 = -15
-let top_field_player2 = -30
+let left_field_player2 = -435
+let top_field_player2 = -20
 let right_field_player2 = 335
-let bottom_field_player2 = -490
+let bottom_field_player2 = -500
 
 // field
 let top_field = -30
@@ -62,7 +59,7 @@ let score_p2 = 0
 scoreP1.innerHTML = `Score: ${score_p1}`
 scoreP2.innerHTML = `Score: ${score_p2}`
 
-let speed = 10
+let speed = 20
 let speed_ball_x = 0
 let speed_ball_y = 0
 
@@ -123,6 +120,7 @@ function moveBall(){
     
     handlerCollision()
     kick()
+    goal()
 }
 
 function handlerCollision(){
@@ -132,20 +130,27 @@ function handlerCollision(){
     if (pos_ball_x < left_field && (pos_ball_y > goal_top || pos_ball_y < goal_bottom)) speed_ball_x *= -1
 }
 
-// function goal(){
-//     if 
-// }
+function goal(){
+    if ((goal_top > pos_ball_y && pos_ball_y > goal_bottom) && pos_ball_x > right_field) {
+        score_p1++
+        scoreP1.innerHTML = `Score: ${score_p1}`
+        resetBall()
+    }
+    if ((goal_top > pos_ball_y && pos_ball_y > goal_bottom) && pos_ball_x < left_field) {
+        score_p2++
+        scoreP2.innerHTML = `Score: ${score_p2}`
+        resetBall()
+    }
+}
 
 function resetBall(){
-    // goal condition
-    if (goal_top > pos_ball_y > goal_bottom && pos_ball_x > right_field) {
-        score_p1 += 1
-        scoreP1.innerHTML = `Score: ${score_p1}`
-        ball.left = '0px'
-        ball.bottom = '-280px'
-        speed_ball_x = 0
-        speed_ball_y = 0
-    }
+    ball.left = initial_x
+    ball.bottom = initial_y
+    pos_ball = convertPixelToInteger(ball)
+    pos_ball_x = pos_ball[0]
+    pos_ball_y = pos_ball[1]
+    speed_ball_x = 10
+    speed_ball_y = 10
 }
 
 function distanceTwoPoint(x1, y1, x2, y2){
@@ -244,12 +249,19 @@ function movePlayer2(){
     }
 }
 
+function endGame(){
+    if (score_p1 === 2) {
+        alert('Player1 Win!!!')
+    } else if (score_p2 === 2) {
+        alert('Player2 Win!!!')
+    }
+}
+
 function startGame(){
     movePlayer1()
     movePlayer2()
     moveBall()
-    // resetBall()
-    // goal()
+    endGame()
 }
 window.onload = function() {
     setInterval("startGame()",100);
