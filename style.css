@@ -10,6 +10,9 @@
 #player1, #player2, #ball {
     border-radius: 50%;
 }
+#ball {
+    z-index: 99;
+}
 body{
     display: flex;
     justify-content: center;
