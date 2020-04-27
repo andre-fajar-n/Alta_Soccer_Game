@@ -1,8 +1,12 @@
+// kickoff ball
+let initial_x = '100px'
+let initial_y = '-285px'
+
 // ball
 let ball = document.getElementById('ball').style
 ball.backgroundColor = 'red'
-ball.left = '-100px'
-ball.bottom = '-280px'
+ball.left = initial_x
+ball.bottom = initial_y
 ball.position = 'relative'
 ball.width = ball.height = '25px'
 
@@ -14,15 +18,11 @@ let pos_ball_y = pos_ball[1]
 // player1
 let player1 = document.getElementById('player1').style
 player1.backgroundColor = '#FF69B4'
-player1.left = `${-385 + 50}px`
-player1.bottom = `${pos_ball_y + 25}px`
+player1.left = '-335px'
+player1.bottom = '-260px'
 player1.position = 'relative'
 player1.width = player1.height = '75px'
 let up1 = down1 = left1 = right1 = 0
-
-let pos_p1 = convertPixelToInteger(player1)
-let pos_p1_x = pos_p1[0]
-let pos_p1_y = pos_p1[1]
 
 let left_field_player1 = -335
 let top_field_player1 = -30
@@ -114,125 +114,133 @@ function moveBall(){
     
     pos_ball_y += speed_ball_y
     ball.bottom = `${pos_ball_y}px`
-
-    handlerCollision()
-    kick()
-
+    
     speed_ball_x *= 0.98
     speed_ball_y *= 0.98
-
+    
     if (Math.abs(speed_ball_x) < 0.5) speed_ball_x = 0
     if (Math.abs(speed_ball_y) < 0.5) speed_ball_y = 0
-}
-
-function resetBall(){
-    ball.left = '0px'
-    ball.bottom = '-280px'
-    startGame()
-}
-
-function distanceTwoPoint(x1, y1, x2, y2){
-    return Math.sqrt((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2))
-}
-
-function kick(){
-    let leftNumbers = player1.left.replace('px', '')
-    let x_coordinat = parseInt(leftNumbers, 10)
-    x_coordinat -= 50
     
-    let rightNumbers = player1.bottom.replace('px', '')
-    let y_coordinat = parseInt(rightNumbers, 10)
-    y_coordinat -= 25
-    let distance = distanceTwoPoint(x_coordinat, y_coordinat, pos_ball_x, pos_ball_y)
-    if (Math.abs(distance) <= 50) {
-        speed_ball_x = speed
-    }
+    handlerCollision()
+    kick()
 }
 
 function handlerCollision(){
     if (pos_ball_y > top_field) speed_ball_y *= -1
     if (pos_ball_y < bottom_field) speed_ball_y *= -1
     if (pos_ball_x > right_field && (pos_ball_y > goal_top || pos_ball_y < goal_bottom)) speed_ball_x *= -1
-    
-    // goal condition
-    // if (goal_top > pos_ball_y > goal_bottom && pos_ball_x > right_field) {
-    //     score_p1 += 1
-    //     scoreP1.innerHTML = `Score: ${score_p1}`
-    //     return resetBall()
-    // }
-
     if (pos_ball_x < left_field && (pos_ball_y > goal_top || pos_ball_y < goal_bottom)) speed_ball_x *= -1
-
-    // goal condition
-    // else if (goal_top > pos_ball_y > goal_bottom && pos_ball_x < left_field) {
-    //     resetBall()
-    //     score_p2 += 1
-    //     scoreP2.innerHTML = `Score: ${score_p2}`
-    // }
-    // if (Math.abs(right - pos_ball_x) <= 50) speed_ball_x = speed
-
-
 }
 
+// function goal(){
+//     if 
+// }
+
+function resetBall(){
+    // goal condition
+    if (goal_top > pos_ball_y > goal_bottom && pos_ball_x > right_field) {
+        score_p1 += 1
+        scoreP1.innerHTML = `Score: ${score_p1}`
+        ball.left = '0px'
+        ball.bottom = '-280px'
+        speed_ball_x = 0
+        speed_ball_y = 0
+    }
+}
+
+function distanceTwoPoint(x1, y1, x2, y2){
+    return Math.sqrt((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2))
+}
+
+function angleTwoPoint(x1, y1, x2, y2){
+    return Math.atan2((y2 - y1), (x2 - x1));
+}
+
+function kick(){
+    let x1 = player1.left.replace('px', '')
+    let x_coordinat_1 = parseInt(x1, 10)
+    x_coordinat_1 -= 50
+    
+    let y1 = player1.bottom.replace('px', '')
+    let y_coordinat_1 = parseInt(y1, 10)
+    y_coordinat_1 -= 25
+    
+    let x2 = player2.left.replace('px', '')
+    let x_coordinat_2 = parseInt(x2, 10)
+    x_coordinat_2 += 50
+    
+    let y2 = player2.bottom.replace('px', '')
+    let y_coordinat_2 = parseInt(y2, 10)
+    y_coordinat_2 -= 25
+
+    let distance_1 = distanceTwoPoint(x_coordinat_1, y_coordinat_1, pos_ball_x, pos_ball_y)
+    let angle_1 = angleTwoPoint(x_coordinat_1, y_coordinat_1, pos_ball_x, pos_ball_y)
+
+    let distance_2 = distanceTwoPoint(x_coordinat_2, y_coordinat_2, pos_ball_x, pos_ball_y)
+    let angle_2 = angleTwoPoint(x_coordinat_2, y_coordinat_2, pos_ball_x, pos_ball_y)
+
+    if (Math.abs(distance_1) <= 50) {
+        speed_ball_x = speed*Math.sin(angle_1)
+        speed_ball_y = speed*Math.cos(angle_1)
+    }
+    if (Math.abs(distance_2) <= 50) {
+        speed_ball_x = speed*Math.sin(angle_2)
+        speed_ball_y = speed*Math.cos(angle_2)
+    }
+}
+
+
 function movePlayer1(){
+    var p1x = player1.left.replace('px', '')
+    var p1_x = parseInt(p1x, 10)
+    var p1y = player1.bottom.replace('px', '')
+    var p1_y = parseInt(p1y, 10)
     if (left1 === 1) {
-        var leftNumbers = player1.left.replace('px', '')
-        var left = parseInt(leftNumbers, 10)
-        left -= speed
-        if (left < left_field_player1) player1.left = left_field_player1
-        else player1.left = `${left}px`
+        p1_x -= speed
+        if (p1_x < left_field_player1) player1.left = left_field_player1
+        else player1.left = `${p1_x}px`
     }
     if (right1 === 1) {
-        var rightNumbers = player1.left.replace('px', '')
-        var right = parseInt(rightNumbers, 10)
-        right += speed
-        if (right > right_field_player1) player1.left = right_field_player1
-        else player1.left = `${right}px`
+        p1_x += speed
+        if (p1_x > right_field_player1) player1.left = right_field_player1
+        else player1.left = `${p1_x}px`
     }
     if (up1 === 1) {
-        var topNumbers = player1.bottom.replace('px', '')
-        var top = parseInt(topNumbers, 10)
-        top += speed
-        if (top > top_field_player1) player1.bottom = top_field_player1
-        else player1.bottom = `${top}px`
+        p1_y += speed
+        if (p1_y > top_field_player1) player1.bottom = top_field_player1
+        else player1.bottom = `${p1_y}px`
     }
     if (down1 === 1) {
-        var bottomNumbers = player1.bottom.replace('px', '')
-        var bottom = parseInt(bottomNumbers, 10)
-        bottom -= speed
-        if (bottom < bottom_field_player1) player1.bottom = bottom_field_player1
-        else player1.bottom = `${bottom}px`
+        p1_y -= speed
+        if (p1_y < bottom_field_player1) player1.bottom = bottom_field_player1
+        else player1.bottom = `${p1_y}px`
     }
 }
 
 function movePlayer2(){
+    var p2x = player2.left.replace('px', '')
+    var p2_x = parseInt(p2x, 10)
+    var p2y = player2.bottom.replace('px', '')
+    var p2_y = parseInt(p2y, 10)
     if (left2 === 1) {
-        var leftNumbers = player2.left.replace('px', '')
-        var left = parseInt(leftNumbers, 10)
-        left -= speed
-        if (left < left_field_player2) player2.left = left_field_player2
-        else player2.left = `${left}px`
+        p2_x -= speed
+        if (p2_x < left_field_player2) player2.left = left_field_player2
+        else player2.left = `${p2_x}px`
     }
     if (right2 === 1) {
-        var rightNumbers = player2.left.replace('px', '')
-        var right = parseInt(rightNumbers, 10)
-        right += speed
-        if (right > right_field_player2) player2.left = right_field_player2
-        else player2.left = `${right}px`
+        p2_x += speed
+        if (p2_x > right_field_player2) player2.left = right_field_player2
+        else player2.left = `${p2_x}px`
     }
     if (up2 === 1) {
-        var topNumbers = player2.bottom.replace('px', '')
-        var top = parseInt(topNumbers, 10)
-        top += speed
-        if (top > top_field_player2) player2.bottom = top_field_player2
-        else player2.bottom = `${top}px`
+        p2_y += speed
+        if (p2_y > top_field_player2) player2.bottom = top_field_player2
+        else player2.bottom = `${p2_y}px`
     }
     if (down2 === 1) {
-        var bottomNumbers = player2.bottom.replace('px', '')
-        var bottom = parseInt(bottomNumbers, 10)
-        bottom -= speed
-        if (bottom < bottom_field_player2) player2.bottom = bottom_field_player2
-        else player2.bottom = `${bottom}px`
+        p2_y -= speed
+        if (p2_y < bottom_field_player2) player2.bottom = bottom_field_player2
+        else player2.bottom = `${p2_y}px`
     }
 }
 
@@ -240,6 +248,7 @@ function startGame(){
     movePlayer1()
     movePlayer2()
     moveBall()
+    // resetBall()
     // goal()
 }
 window.onload = function() {
