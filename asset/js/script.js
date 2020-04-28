@@ -59,9 +59,19 @@ let score_p2 = 0
 scoreP1.innerHTML = `Score: ${score_p1}`
 scoreP2.innerHTML = `Score: ${score_p2}`
 
+// speed
 let speed = 20
 let speed_ball_x = 0
 let speed_ball_y = 0
+
+// sounds
+let kick_sound = new Audio()
+let goal_sound = new Audio()
+let backsound = new Audio()
+
+kick_sound.src = "asset/sound/kick.wav"
+goal_sound.src = "asset/sound/goal1.wav"
+backsound.src = "asset/sound/tsubasa.mp3"
 
 // Keyboard Function on Keydown
 document.onkeydown = function(event) {
@@ -134,11 +144,13 @@ function goal(){
     if ((goal_top > pos_ball_y && pos_ball_y > goal_bottom) && pos_ball_x > right_field) {
         score_p1++
         scoreP1.innerHTML = `Score: ${score_p1}`
+        goal_sound.play()
         resetBall()
     }
     if ((goal_top > pos_ball_y && pos_ball_y > goal_bottom) && pos_ball_x < left_field) {
         score_p2++
         scoreP2.innerHTML = `Score: ${score_p2}`
+        goal_sound.play()
         resetBall()
     }
 }
@@ -149,8 +161,8 @@ function resetBall(){
     pos_ball = convertPixelToInteger(ball)
     pos_ball_x = pos_ball[0]
     pos_ball_y = pos_ball[1]
-    speed_ball_x = 10
-    speed_ball_y = 10
+    speed_ball_x = 0
+    speed_ball_y = 0
 }
 
 function distanceTwoPoint(x1, y1, x2, y2){
@@ -179,18 +191,20 @@ function kick(){
     y_coordinat_2 -= 25
 
     let distance_1 = distanceTwoPoint(x_coordinat_1, y_coordinat_1, pos_ball_x, pos_ball_y)
-    let angle_1 = angleTwoPoint(x_coordinat_1, y_coordinat_1, pos_ball_x, pos_ball_y)
-
+    
     let distance_2 = distanceTwoPoint(x_coordinat_2, y_coordinat_2, pos_ball_x, pos_ball_y)
-    let angle_2 = angleTwoPoint(x_coordinat_2, y_coordinat_2, pos_ball_x, pos_ball_y)
-
+    
     if (Math.abs(distance_1) <= 50) {
-        speed_ball_x = speed*Math.sin(angle_1)
-        speed_ball_y = speed*Math.cos(angle_1)
+        let angle_1 = angleTwoPoint(x_coordinat_1, y_coordinat_1, pos_ball_x, pos_ball_y)
+        speed_ball_x = speed*Math.cos(angle_1)
+        speed_ball_y = speed*Math.sin(angle_1)
+        kick_sound.play()
     }
     if (Math.abs(distance_2) <= 50) {
-        speed_ball_x = speed*Math.sin(angle_2)
-        speed_ball_y = speed*Math.cos(angle_2)
+        let angle_2 = angleTwoPoint(x_coordinat_2, y_coordinat_2, pos_ball_x, pos_ball_y)
+        speed_ball_x = speed*Math.cos(angle_2)
+        speed_ball_y = speed*Math.sin(angle_2)
+        kick_sound.play()
     }
 }
 
@@ -252,12 +266,15 @@ function movePlayer2(){
 function endGame(){
     if (score_p1 === 2) {
         alert('Player1 Win!!!')
+        // startGame()
     } else if (score_p2 === 2) {
         alert('Player2 Win!!!')
+        // startGame()
     }
 }
 
 function startGame(){
+    backsound.play()
     movePlayer1()
     movePlayer2()
     moveBall()
