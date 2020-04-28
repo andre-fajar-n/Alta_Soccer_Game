@@ -266,10 +266,8 @@ function movePlayer2(){
 function endGame(){
     if (score_p1 === 2) {
         alert('Player1 Win!!!')
-        // startGame()
     } else if (score_p2 === 2) {
         alert('Player2 Win!!!')
-        // startGame()
     }
 }
 
