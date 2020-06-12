@@ -1,6 +1,10 @@
 // kickoff ball
 let initial_x = '0px'
 let initial_y = '-285px'
+let initial_player1_x = '-335px'
+let initial_player1_y = '-260px'
+let initial_player2_x = '335px'
+let initial_player2_y = '-260px'
 
 // ball
 let ball = document.getElementById('ball').style
@@ -16,8 +20,8 @@ let pos_ball_y = pos_ball[1]
 
 // player1
 let player1 = document.getElementById('player1').style
-player1.left = '-335px'
-player1.bottom = '-260px'
+player1.left = initial_player1_x
+player1.bottom = initial_player1_y
 player1.position = 'relative'
 player1.width = player1.height = '75px'
 let up1 = down1 = left1 = right1 = 0
@@ -29,8 +33,8 @@ let bottom_field_player1 = -500
 
 // player 2
 let player2 = document.getElementById('player2').style
-player2.left = '335px'
-player2.bottom = '-260px'
+player2.left = initial_player2_x
+player2.bottom = initial_player2_y
 player2.position = 'relative'
 player2.width = player2.height = '75px'
 let up2 = down2 = left2 = right2 = 0
@@ -161,6 +165,10 @@ function resetBall(){
     pos_ball = convertPixelToInteger(ball)
     pos_ball_x = pos_ball[0]
     pos_ball_y = pos_ball[1]
+    player1.left = initial_player1_x
+    player1.bottom = initial_player1_y
+    player2.left = initial_player2_x
+    player2.bottom = initial_player2_y
     speed_ball_x = 0
     speed_ball_y = 0
 }

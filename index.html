@@ -1,19 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="asset/css/style.css">
-</head>
-<body>
-    <div id="score_p1"></div>
-    <div class="lapangan">
-        <div id="player1"></div>
-        <div id="ball"></div>
-        <div id="player2"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alta Soccer</title>
+    <link rel="stylesheet" href="asset/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <div class="pt-3 landing-page">
+      <div class="text-center text-white mx-auto welcome py-3">
+        <h5>
+          Selamat Datang di
+        </h5>
+        <h1 class="text-uppercase">
+          Alta Soccer
+        </h1>
+      </div>
+      <div class="py-3 aturan my-3 d-flex justify-content-center">
+          <div class="text-white">
+
+              <h4 class="text-center">Aturan permainan</h4>
+              <ol>
+                <li>Pemain berjumlah 2 orang</li>
+                <li>Setiap pemain mempunyai 1 pion</li>
+                <li>Pion dapat bergerak di seluruh area lapangan</li>
+                <li>
+                  Pemain 1 berada di sebelah kiri, pemain 2 berada di sebelah kanan
+                </li>
+                <li>
+                  Permainan berakhir ketika salah seorang pemain telah mendapat 3 gol
+                </li>
+                <li>
+                  Tombol untuk menggerakkan pion:
+                  <div class="row pt-2">
+                    <div class="col-6">
+                      <p>Pemain 1</p>
+                      <i class="fa fa-arrow-up fa-2x"></i> : tombol W </br>
+                      <i class="fa fa-arrow-down fa-2x"></i> : tombol S </br>
+                      <i class="fa fa-arrow-left fa-2x"></i> : tombol A </br>
+                      <i class="fa fa-arrow-right fa-2x"></i> : tombol D </br>
+                    </div>
+                    <div class="col-6">
+                      <p>Pemain 2</p>
+                      <i class="fa fa-arrow-up fa-2x"></i> : tombol I </br>
+                      <i class="fa fa-arrow-down fa-2x"></i> : tombol K </br>
+                      <i class="fa fa-arrow-left fa-2x"></i> : tombol J </br>
+                      <i class="fa fa-arrow-right fa-2x"></i> : tombol L </br>
+                    </div>
+                  </div>
+                </li>
+              </ol>
+          </div>
+      </div>
+      <div class="d-flex justify-content-center pb-4">
+          <div class="btn btn-lg btn-primary text-center w-75">
+            <a href="play.html" class="text-white" style="text-decoration: none;">
+                Play
+            </a>  
+        </div>
+      </div>
     </div>
-    <div id="score_p2"></div>
-    <script src="asset/js/script.js"></script>
-</body>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
