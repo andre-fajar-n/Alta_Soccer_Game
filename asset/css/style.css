@@ -1,61 +1,84 @@
-.lapangan{
-    background-image: url(../img/lapangan.png);
-    background-size: contain;
-    height: 600px;
-    width: 900px;
-    display: flex;
-    justify-content: center;
-    box-shadow: 0 0 6px black;
+.lapangan {
+  background-image: url(../img/lapangan.png);
+  background-size: contain;
+  height: 600px;
+  width: 900px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 0 6px black;
 }
-#player1, #player2, #ball {
-    border-radius: 50%;
+#player1,
+#player2,
+#ball {
+  border-radius: 50%;
 }
-#player1{
-    background-image: url(../img/bendera.png);
-    background-size: 75px 75px;
+#player1 {
+  background-image: url(../img/bendera.png);
+  background-size: 75px 75px;
 }
-#player2{
-    background-image: url(../img/malaysia.png);
-    background-size: 75px 75px;
+#player2 {
+  background-image: url(../img/malaysia.png);
+  background-size: 75px 75px;
 }
 #ball {
-    z-index: 99;
-    background-image: url(../img/bola.png);
-    background-size: 25px 25px;
+  z-index: 99;
+  background-image: url(../img/bola.png);
+  background-size: 25px 25px;
 }
-body{
-    display: flex;
-    justify-content: center;
-    margin-top: 0;
-    background-image: url(../img/penonton.jpg);
-    background-size: contain;
-    animation: penonton 10s linear infinite;
-    background-repeat: repeat-x;
-    background-position: 0 0;
-    padding-bottom: 0;
+.page-play {
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+  background-image: url(../img/penonton.jpg);
+  background-size: contain;
+  animation: penonton 10s linear infinite;
+  background-repeat: repeat-x;
+  background-position: 0 0;
+  padding-bottom: 29px;
 }
 @keyframes penonton {
-    from {background-position: 0 0;}
-    to {background-position: 100% 0;}
+  from {
+    background-position: 0 0;
   }
-#score_p1, #score_p2{
-    width: 150px;
-    height: 150px;
-    text-align: center;
-    margin-top: 100px;
-    background-color: black;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    box-shadow: 0 0 6px black;
+  to {
+    background-position: 100% 0;
+  }
 }
-#score_p1{
-    margin-right: 10px;
-
+#score_p1,
+#score_p2 {
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  margin-top: 100px;
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 0 6px black;
 }
-#score_p2{
-    margin-left: 10px;
+#score_p1 {
+  margin-right: 10px;
+}
+#score_p2 {
+  margin-left: 10px;
+}
+.welcome {
+  width: 1200px;
+  background-color: hsla(0, 0%, 0%, 0.7);
+  border-radius: 50px;
+}
+.landing-page {
+  font-family: "Ubuntu";
+  background-image: url(../img/penonton.jpg);
+  background-size: contain;
+  animation: penonton 10s linear infinite;
+  background-repeat: repeat-x;
+  background-position: 0 0;
+  padding-bottom: 0;
+}
+.aturan {
+  background-color: hsla(0, 0%, 0%, 0.8);
 }
