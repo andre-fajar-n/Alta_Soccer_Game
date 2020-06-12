@@ -272,10 +272,18 @@ function movePlayer2(){
 }
 
 function endGame(){
-    if (score_p1 === 2) {
-        alert('Player1 Win!!!')
-    } else if (score_p2 === 2) {
-        alert('Player2 Win!!!')
+    scoreP1.innerHTML = `Score: ${score_p1}`
+    scoreP2.innerHTML = `Score: ${score_p2}`
+    if (score_p1 === 3) {
+        alert(`Player1 Win!!!\nScore ${score_p1}:${score_p2}`)
+        score_p1 = 0
+        score_p2 = 0
+    } else if (score_p2 === 3) {
+        // scoreP1.innerHTML = `Score: ${score_p1}`
+        // scoreP2.innerHTML = `Score: ${score_p2}`
+        alert(`Player2 Win!!!\nScore ${score_p1}:${score_p2}`)
+        score_p1 = 0
+        score_p2 = 0
     }
 }
 
